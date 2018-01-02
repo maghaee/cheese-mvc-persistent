@@ -6,7 +6,7 @@
 
 <h1 th:text="${title}">Default Title</h1>
 
-<nav th:replace="fragments :: navigation-main"></nav>
+<nav th:replace="fragments :: navigation"></nav>
 
 <p th:unless="${cheeses} and ${cheeses.size()}">no cheese :(</p>
 
@@ -14,20 +14,23 @@
 <table class="table">
 
     <tr>
+        <th>Edit</th>
         <th>Name</th>
         <th>Description</th>
         <th>Category</th>
     </tr>
 
     <tr th:each="cheese : ${cheeses}">
-        <td th:text="${cheese.name}"></td>
+        <td><a th:href="'cheese/edit/' + ${cheese.id}" th:text="Edit"></a></td>
+        <td th:text="${cheese.name} + ' (' + ${cheese.id} + ')'"></td>
         <td th:text="${cheese.description}"></td>
-        <td th:text="${cheese.category.name}"></td>
+        <td th:text="${cheese.category.getName()}"></td>
     </tr>
 
 </table>
 
-<nav th:replace="fragments :: navigation-cheeses"></nav>
+<a th:href="@{cheese/add}">Add</a> |
+<a th:href="@{cheese/remove}">Remove</a>
 
 </body>
 </html>
